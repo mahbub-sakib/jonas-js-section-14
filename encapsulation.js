@@ -22,9 +22,11 @@ class Account {
 
     deposit(val) {
         this.#movements.push(val);
+        return this;
     }
     withdraw(val) {
         this.deposit(-val);
+        return this;
     }
 
     #approveLoan(val) {
@@ -35,6 +37,7 @@ class Account {
             this.deposit(val);
             console.log('Loan approved');
         }
+        return this;
     }
 }
 
@@ -47,6 +50,9 @@ acc1.deposit(250);
 acc1.withdraw(140);
 acc1.movements = [];
 
+acc1.deposit(100).withdraw(200).requestLoan(500)
+
 console.log(acc1);
 
 acc1.pin = 1133;
+
