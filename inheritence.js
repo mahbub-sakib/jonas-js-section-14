@@ -85,5 +85,36 @@ class StudentCl extends PersonCl {
 
 const abony = new StudentCl('Sadia Afrin Abony', 1996, 'CSE');
 
-abony.introduce();
-abony.calcAge();
+// abony.introduce();
+// abony.calcAge();
+
+//--------------------------inheritence using Object.create----------------------
+
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+};
+
+const sadiq = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+    PersonProto.init.call(this, firstName, birthYear);
+    this.course = course;
+}
+
+StudentProto.introduce = function () {
+    console.log(`My name is ${this.firstName} and i study ${this.course}`);
+}
+
+const shafin = Object.create(StudentProto);
+
+shafin.init('Shafin', 2010, 'CSE');
+shafin.introduce();
+shafin.calcAge();
